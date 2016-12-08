@@ -32,7 +32,7 @@ android {
 //kapt.generateStubs = true
 
 dependencies {
-    kapt 'com.android.databinding:compiler:2.3.0-alpha1'
+    kapt 'com.android.databinding:compiler:2.2.3'
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:design:25.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

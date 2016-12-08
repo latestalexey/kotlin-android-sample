@@ -1,6 +1,7 @@
 package ru.gildor.kotlinandroid
 
 import android.animation.ObjectAnimator
+import android.databinding.BindingAdapter
 import android.databinding.ObservableField
 import android.support.annotation.DrawableRes
 import android.support.design.widget.Snackbar
@@ -27,4 +28,32 @@ class MainActivityViewModel(@DrawableRes val icon: Int) {
                 })
                 .show()
     }
+
+    fun args(): Map<String, Any> = mapOf("arg" to "Test this")
+
+    fun entry(): Map.Entry<String, Any> = mapOf("arg" to "Test this").entries.first()
+}
+
+@BindingAdapter("args")
+fun args(view: View, holder: ArgsHolder?) {
+    holder ?: return
+    view.setOnClickListener {
+        Toast.makeText(view.context, holder.args()["arg"] as String, Toast.LENGTH_SHORT).show()
+    }
+}
+
+interface ArgsHolder {
+    fun args(): Map<String, Any> = emptyMap()
+}
+
+@BindingAdapter("entry")
+fun entry(view: View, holder: EntryHolder?) {
+    holder ?: return
+    view.setOnClickListener {
+        Toast.makeText(view.context, holder.entry().value as String, Toast.LENGTH_SHORT).show()
+    }
+}
+
+interface EntryHolder{
+    fun entry(): Map.Entry<String, Any>
 }
