@@ -23,7 +23,7 @@ class MainActivityViewModel(@DrawableRes val icon: Int) {
         val context = view.context
         Snackbar.make(view, context.getString(R.string.please_replace), Snackbar.LENGTH_LONG)
                 .setAction(context.getString(R.string.action), {
-                    Toast.makeText(context, R.string.toast, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.toast, Toast.LENGTH_LONG).show()
                 })
                 .show()
     }
