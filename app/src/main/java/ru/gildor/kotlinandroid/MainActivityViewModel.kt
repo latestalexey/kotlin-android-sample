@@ -7,19 +7,22 @@ import android.support.annotation.DrawableRes
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 
 class MainActivityViewModel(@DrawableRes val icon: Int) {
-
-    val text = ObservableField<String>("Hello world")
-
+    
+    val text = ObservableString("Hello world")
+    val items = ObservableField<List<String>>(listOf("1", "2", "3"))
+    
     fun rotate(view: View) {
         ObjectAnimator.ofFloat(view, "rotation", 0f, 180f, 0f, 360f)
                 .setDuration(5000)
                 .apply { interpolator = AnticipateOvershootInterpolator() }
                 .start()
     }
-
+    
     fun showSnackbar(view: View) {
         val context = view.context
         Snackbar.make(view, context.getString(R.string.please_replace), Snackbar.LENGTH_LONG)
@@ -28,11 +31,13 @@ class MainActivityViewModel(@DrawableRes val icon: Int) {
                 })
                 .show()
     }
-
+    
     fun args(): Map<String, Any> = mapOf("arg" to "Test this")
-
+    
     fun entry(): Map.Entry<String, Any> = mapOf("arg" to "Test this").entries.first()
 }
+
+class ObservableString(arg: String) : ObservableField<String>(arg)
 
 @BindingAdapter("args")
 fun args(view: View, holder: ArgsHolder?) {
@@ -54,6 +59,17 @@ fun entry(view: View, holder: EntryHolder?) {
     }
 }
 
-interface EntryHolder{
+interface EntryHolder {
     fun entry(): Map.Entry<String, Any>
+}
+
+@BindingAdapter("strings")
+fun setAdapter(view: AdapterView<*>, data: List<String>?) {
+    data?.run {
+        view.adapter = ArrayAdapter<String>(
+                view.context,
+                android.R.layout.simple_list_item_1,
+                this
+        )
+    }
 }

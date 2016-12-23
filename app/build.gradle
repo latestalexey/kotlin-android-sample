@@ -4,7 +4,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "ru.gildor.kotlinandroid"
@@ -32,9 +32,9 @@ android {
 //kapt.generateStubs = true
 
 dependencies {
-    kapt 'com.android.databinding:compiler:2.2.3'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
+    kapt "com.android.databinding:compiler:$android_gradle_version"
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
 
