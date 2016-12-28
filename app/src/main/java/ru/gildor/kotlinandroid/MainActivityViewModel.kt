@@ -15,6 +15,7 @@ class MainActivityViewModel(@DrawableRes val icon: Int) {
     
     val text = ObservableString("Hello world")
     val items = ObservableField<List<String>>(listOf("1", "2", "3"))
+    fun request() = ::Request
     
     fun rotate(view: View) {
         ObjectAnimator.ofFloat(view, "rotation", 0f, 180f, 0f, 360f)
@@ -36,6 +37,8 @@ class MainActivityViewModel(@DrawableRes val icon: Int) {
     
     fun entry(): Map.Entry<String, Any> = mapOf("arg" to "Test this").entries.first()
 }
+
+class Request(val id:Long)
 
 class ObservableString(arg: String) : ObservableField<String>(arg)
 
